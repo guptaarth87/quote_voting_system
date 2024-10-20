@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>API Documentation</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">API Documentation</h1>
+        <p class="text-center">This API allows users to manage quotes.</p>
+
+        <div class="mt-4">
+            <h2>Endpoints</h2>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                        <th>Request Body</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/quote/random</code></td>
+                        <td>GET</td>
+                        <td>Retrieve a random quote.</td>
+                        <td>None</td>
+                        <td>
+                            <pre>
+{
+    "id": 1,
+    "quote": "Life is beautiful!",
+    "author": "John Doe",
+    "upvotes": 10,
+    "downvotes": 2
+}
+                            </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/quote/&lt;id&gt;/vote</code></td>
+                        <td>POST</td>
+                        <td>Vote for a specific quote (upvote or downvote).</td>
+                        <td>
+                            <pre>
+{
+    "upvote": true
+}
+                            </pre>
+                            or
+                            <pre>
+{
+    "downvote": true
+}
+                            </pre>
+                        </td>
+                        <td>
+                            <pre>
+{
+    "id": 1,
+    "quote": "Life is beautiful!",
+    "author": "John Doe",
+    "upvotes": 11,
+    "downvotes": 2
+}
+                            </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>/quote/add</code></td>
+                        <td>POST</td>
+                        <td>Add a new quote.</td>
+                        <td>
+                            <pre>
+{
+    "quote": "New quote text",
+    "author": "Author Name"
+}
+                            </pre>
+                        </td>
+                        <td>
+                            <pre>
+{
+    "message": "Quote added successfully!",
+    "quote": {
+        "id": 2,
+        "quote": "New quote text",
+        "author": "Author Name",
+        "upvotes": 0,
+        "downvotes": 0
+    }
+}
+                            </pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

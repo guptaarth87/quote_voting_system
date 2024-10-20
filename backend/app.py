@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request,send_from_directory,  render_template
 from flask_cors import CORS
 from models import db, Quote
 import random
+import os
 
 app = Flask(__name__)
 
@@ -17,6 +18,10 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
+
+    
+
 # Route to get a random quote
 @app.route('/quote/random', methods=['GET'])
 def get_random_quote():
@@ -31,6 +36,11 @@ def get_random_quote():
             'downvotes': quote.downvotes
         })
     return jsonify({'message': 'No quotes found'}), 404
+
+@app.route('/',methods=['GET'])
+def index():
+     return render_template('Index.html')
+    #  return jsonify({'message': 'App is up!'}), 201
 
 # Route to vote for a quote (upvote or downvote)
 @app.route('/quote/<int:id>/vote', methods=['POST'])
@@ -85,5 +95,6 @@ def add_quote():
         }
     }), 201
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
